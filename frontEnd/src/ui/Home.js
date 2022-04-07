@@ -1,38 +1,20 @@
 import React from "react"
 import {Button, Container,  Row, Col, Image,} from "react-bootstrap";
-import {Employee} from "./Employee";
-// import {Image} from "react-bootstrap/Image";
+import {AudioPlayer} from "./AudioPlayer";
+import {Footer} from "./Footer";
+
+
 
 
 export function Home() {
-	const employees = [
-		{
-			name: 'boogaloo',
-			job: 'carpenter',
-
-		},
-		{
-			name: 'zoe',
-			job: 'exploder'
-		},
-		{
-			name: 'braken',
-			job: 'boxer'
-		},
-		{
-			name:'koonite',
-			job:' vampire'
-		},
-
-	]
 
 	return (
 		<>
 			<Container>
-				<div className="container bg-light p-5 rounded my-5">
-						<h1 className="display-4">Scared you!</h1>
-						<p>Lets go we just keep doing this until we have it down</p>
-					<Button variant="primary"> eskifidg</Button>
+				<div className="container bg-light p-5 rounded my-5 text-center">
+						<h1 className="display-4">SKY WALKER BEATS</h1>
+
+
 					</div>
 			</Container>
 
@@ -51,11 +33,13 @@ export function Home() {
 
 			</div>
 			<Container>
-				<Row className={'g-5 py-5'}>
-					{employees.map(employee => <Employee employee={employee}/>)}
-				</Row>
+<AudioPlayer/>
 
-</Container>
+
+
+			</Container>
+
+
 
 
 
