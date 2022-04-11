@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {Button} from "bootstrap";
 import {Container} from "react-bootstrap"
 import style from "./Audio.Module.css"
@@ -6,13 +6,25 @@ import {BsArrowBarLeft} from "react-icons/bs"
 import {BsArrowBarRight} from "react-icons/bs"
 import {BsPlayFill} from "react-icons/bs"
 import {BsPauseFill} from "react-icons/bs"
-
+import song from "../audio samples/Foreign 168bpm.mp3"
 
 
 export const AudioPlayer = () => {
    const [isPlaying, setIsPlaying] = useState(false);
+
+   // references reference our audio component
+   const audioPlayer = useRef();
+
    const togglePlayPause = () => {
-       setIsPlaying(!isPlaying);
+       const preValue = isPlaying;
+       setIsPlaying(!preValue);
+
+       if(!preValue){
+           audioPlayer.current.play();
+
+       }else {
+           audioPlayer.current.pause();
+       }
      
    }
     return (
@@ -21,7 +33,7 @@ export const AudioPlayer = () => {
 
 
 
-    <audio src="../audio%20samples/Foreign%20168bpm.mp3" preload="metadata"> </audio>
+    <audio ref={audioPlayer} src="../audio%20samples/Foreign%20168bpm.mp3" preload="metadata"> </audio>
     <button className={style.forwardBackwards}> <BsArrowBarLeft/> 30s</button>
     <button onClick={togglePlayPause} className={style.playPause}>
         {isPlaying ? <BsPauseFill/> : <BsPlayFill/>}
