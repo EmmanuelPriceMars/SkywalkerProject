@@ -47,7 +47,7 @@ height: 75px;
 
 .progressBar{
 --bar-bg: red;
-    --seek-before-width: 100px;
+    --seek-before-width: 0;
     --seek-before-color: blue;
     --knobby: green;
     --selectKnobby: purple;

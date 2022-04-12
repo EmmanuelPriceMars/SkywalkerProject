@@ -13,16 +13,27 @@ import audio from "../audioSamples/Foreign.mp3"
 export const AudioPlayer = () => {
    const [isPlaying, setIsPlaying] = useState(false);
    const [duration, setDuration] = useState(0);
+   const [currenTime, setCurrentTime] = useState(0)
 
 
-   // references reference our audio component
+   // references reference our audio component and progress bar
    const audioPlayer = useRef(null);
+   const progressBar = useRef();
 
    useEffect(() =>{
        const seconds = Math.floor(audioPlayer.current.duration);
        setDuration(seconds);
+       progressBar.current.max = seconds;
 
    },[audioPlayer?.current?.loadedMetadata, audioPlayer?.current?.readyState]);
+
+   const calculateTime = (secs) => {
+       const minutes = Math.floor(secs / 60);
+       const returnMinutes = minutes < 10? `0${minutes}` : `${minutes}`;
+       const seconds = Math.floor (secs %  60);
+       const returnSeconds = seconds < 10? `0${seconds}` : `${seconds}`;
+return `${returnMinutes} : ${returnSeconds}`;
+   }
 
    const togglePlayPause = () => {
        const preValue = isPlaying;
@@ -35,6 +46,13 @@ export const AudioPlayer = () => {
            audioPlayer.current.pause();
        }
      
+   }
+
+   const changeRange = () => {
+       audioPlayer.current.currentTime = progressBar.current.value;
+       progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
+
+
    }
     return (
         <>
@@ -50,15 +68,15 @@ export const AudioPlayer = () => {
     </button>
     <button className={style.forwardBackwards}>30s <BsArrowBarRight/> </button>
 <div className={style.currentTime}>
-    0:00
+    {calculateTime(currenTime)}
 </div>
 <div>
-    <input type="range" className={style.progressBar}/>
+    <input type="range" className={style.progressBar} defaultValue="0" ref={progressBar} onChange={changeRange}/>
 
 
 </div>
                 <div className={style.duration}>
-                    {duration}
+                    {(duration && !isNaN(duration)) && calculateTime(duration)}
                 </div>
 
             </Container>
