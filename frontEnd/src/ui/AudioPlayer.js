@@ -18,7 +18,8 @@ export const AudioPlayer = () => {
 
    // references reference our audio component and progress bar
    const audioPlayer = useRef(null);
-   const progressBar = useRef();
+   const progressBar = useRef(null);
+   const animationRef = useRef()
 
    useEffect(() =>{
        const seconds = Math.floor(audioPlayer.current.duration);
@@ -41,19 +42,32 @@ return `${returnMinutes} : ${returnSeconds}`;
 
        if(!preValue){
            audioPlayer.current.play();
+           animationRef.current = requestAnimationFrame(whilePlaying);
 
        }else {
            audioPlayer.current.pause();
+           cancelAnimationFrame(animationRef.current)
        }
      
    }
 
+   const whilePlaying = () => {
+       progressBar.current.value = audioPlayer.current.currentTime;
+     changePlayerCurrentTime();
+       animationRef.current = requestAnimationFrame(whilePlaying);
+   }
+
    const changeRange = () => {
        audioPlayer.current.currentTime = progressBar.current.value;
-       progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
+changePlayerCurrentTime();
+   }
 
+   const changePlayerCurrentTime = () => {
+       progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
+       setCurrentTime(progressBar.current.value);
 
    }
+
     return (
         <>
             <Container className={style.audioPlayer} >
