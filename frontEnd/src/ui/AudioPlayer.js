@@ -8,12 +8,12 @@ import {BsPlayFill} from "react-icons/bs"
 import {BsPauseFill} from "react-icons/bs"
 import ReactAudioPlayer from 'react-audio-player';
 import song from "../Foreign.mp3"
-
+import song2 from "../bang-v .mp3"
 
 
 
 export const AudioPlayer = () => {
-    const sound = new Audio('Foreign.mp3')
+
 
    const [isPlaying, setIsPlaying] = useState(false);
    const [duration, setDuration] = useState(0);
@@ -26,7 +26,6 @@ export const AudioPlayer = () => {
    const audioPlayer = useRef(null);
    const progressBar = useRef(null);
    const animationRef = useRef()
-
    useEffect(() =>{
        const seconds = Math.floor(audioPlayer.current.duration);
        setDuration(seconds);
@@ -73,6 +72,15 @@ changePlayerCurrentTime();
        setCurrentTime(progressBar.current.value);
 
    }
+   const backThirty = () => {
+       progressBar.current.value = Number(progressBar.current.value) - 30;
+       changeRange();
+   }
+
+   const forwardThirty = () => {
+       progressBar.current.value = Number(progressBar.current.value) + 30;
+       changeRange()
+   }
 
     return (
         <>
@@ -81,12 +89,12 @@ changePlayerCurrentTime();
 
 
     <audio ref={audioPlayer} src={song} preload="metadata"> </audio>
-    <button className={style.forwardBackwards}> <BsArrowBarLeft/> 30s</button>
+    <button className={style.forwardBackwards} onClick={backThirty}> <BsArrowBarLeft/> 30s</button>
     <button onClick={togglePlayPause} className={style.playPause}>
         {isPlaying ? <BsPauseFill/> : <BsPlayFill/>}
 
     </button>
-    <button className={style.forwardBackwards}>30s <BsArrowBarRight/> </button>
+    <button className={style.forwardBackwards} onClick={forwardThirty}>30s <BsArrowBarRight/> </button>
 <div className={style.currentTime}>
     {calculateTime(currenTime)}
 </div>
@@ -100,6 +108,8 @@ changePlayerCurrentTime();
                 </div>
 
             </Container>
+
+
 
 
 

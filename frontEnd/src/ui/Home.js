@@ -6,9 +6,10 @@ import background from "../images/sempiternal.jpg"
 
 
 
-
-
 export function Home() {
+
+
+
 
 	return (
 		<>
@@ -38,7 +39,7 @@ export function Home() {
 
 
 			<Container>
-<AudioPlayer/>
+<AudioPlayer />
 
 
 
