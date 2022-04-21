@@ -9,15 +9,13 @@ import {BsPauseFill} from "react-icons/bs"
 import ReactAudioPlayer from 'react-audio-player';
 import song from "../Foreign.mp3"
 import song2 from "../bang-v .mp3"
-
+import {useAudio} from "./AudioHooks";
 
 
 export const AudioPlayer = () => {
 
 
-   const [isPlaying, setIsPlaying] = useState(false);
-   const [duration, setDuration] = useState(0);
-   const [currenTime, setCurrentTime] = useState(0)
+
 
 const chapters =[ {
        start: 0,
@@ -29,69 +27,26 @@ const chapters =[ {
     }];
 
 
-   // references reference our audio component and progress bar
-   const audioPlayer = useRef(null);
-   const progressBar = useRef(null);
-   const animationRef = useRef()
-   useEffect(() =>{
-       const seconds = Math.floor(audioPlayer.current.duration);
-       setDuration(seconds);
-       progressBar.current.max = seconds;
 
-   },[audioPlayer?.current?.loadedMetadata, audioPlayer?.current?.readyState]);
+    const {
+       isPlaying,
+        duration,
+        currentTime,
+        audioPlayer,
+        progressBar,
+        calculateTime,
+        togglePlayPause,
+        changeRange,
+        forwardThirty,
+        backThirty,
+        setIsPlaying,
+        setCurrentTime,
+        setDuration
+
+    } = useAudio();
 
 
-
-   const calculateTime = (secs) => {
-       const minutes = Math.floor(secs / 60);
-       const returnMinutes = minutes < 10? `0${minutes}` : `${minutes}`;
-       const seconds = Math.floor (secs %  60);
-       const returnSeconds = seconds < 10? `0${seconds}` : `${seconds}`;
-return `${returnMinutes} : ${returnSeconds}`;
-   }
-
-   const togglePlayPause = () => {
-       const preValue = isPlaying;
-       setIsPlaying(!preValue);
-
-       if(!preValue){
-           audioPlayer.current.play();
-           animationRef.current = requestAnimationFrame(whilePlaying);
-
-       }else {
-           audioPlayer.current.pause();
-           cancelAnimationFrame(animationRef.current)
-       }
-     
-   }
-
-   const whilePlaying = () => {
-       progressBar.current.value = audioPlayer.current.currentTime;
-     changePlayerCurrentTime();
-       animationRef.current = requestAnimationFrame(whilePlaying);
-   }
-
-   const changeRange = () => {
-       audioPlayer.current.currentTime = progressBar.current.value;
-changePlayerCurrentTime();
-   }
-
-   const changePlayerCurrentTime = () => {
-       progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
-       setCurrentTime(progressBar.current.value);
-
-   }
-   const backThirty = () => {
-       progressBar.current.value = Number(progressBar.current.value) - 30;
-       changeRange();
-   }
-
-   const forwardThirty = () => {
-       progressBar.current.value = Number(progressBar.current.value) + 30;
-       changeRange()
-   }
-
-    return (
+   return (
         <>
             <Container className={style.audioPlayer} >
 
@@ -105,7 +60,7 @@ changePlayerCurrentTime();
     </button>
     <button className={style.forwardBackwards} onClick={forwardThirty}>30s <BsArrowBarRight/> </button>
 <div className={style.currentTime}>
-    {calculateTime(currenTime)}
+    {calculateTime(currentTime)}
 </div>
 <div className={style.progressBarWrapper}>
     <input type="range" className={style.progressBar} defaultValue="0" ref={progressBar} onChange={changeRange}/>
