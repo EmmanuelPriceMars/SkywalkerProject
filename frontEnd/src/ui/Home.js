@@ -1,6 +1,7 @@
 import React from "react"
 import {Button, Container,  Row, Col, Image,} from "react-bootstrap";
 import {AudioPlayer} from "./AudioPlayer";
+import {MusicSampler} from "./NewAudio"
 import style from "./Home.Modules.css"
 import background from "../images/sempiternal.jpg"
 
@@ -39,7 +40,7 @@ export function Home() {
 
 
 			<Container>
-<AudioPlayer />
+<MusicSampler/>
 
 
 

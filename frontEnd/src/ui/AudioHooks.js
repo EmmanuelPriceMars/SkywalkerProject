@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 
 export const useAudio = () => {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying1, setIsPlaying1] = useState(false)
     const [duration, setDuration] = useState(0);
     const [currenTime, setCurrentTime] = useState(0)
 
@@ -10,7 +11,7 @@ export const useAudio = () => {
     const progressBar = useRef(null);
     const animationRef = useRef()
 
-
+//grabbing meta data
     useEffect(() =>{
         const seconds = Math.floor(audioPlayer.current.duration);
         setDuration(seconds);
@@ -93,7 +94,8 @@ export const useAudio = () => {
             forwardThirty,
             setDuration,
             setIsPlaying,
-            setCurrentTime
+            setCurrentTime,
+
 
         }
     }
