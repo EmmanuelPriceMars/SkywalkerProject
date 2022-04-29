@@ -24,7 +24,7 @@ export const MusicSampler = () => {
             <div className='musicContainer'>
 
                 <div className="song" onMouseDown={() => setSong(song1)} onClick={() => { playing? stop() : play();
-                    setPlaying(!playing)
+                    setPlaying(!playing);
                 }}>
                     {playing? <FontAwesomeIcon icon={faPauseCircle}/> :
                         <FontAwesomeIcon icon={faPlayCircle} />
@@ -37,7 +37,7 @@ export const MusicSampler = () => {
                 <div className="song" onMouseDown={() => setSong(song2)}
                      onClick={() =>{
                     playing2? stop() : play();
-                    setPlaying2(!playing2)
+                    setPlaying2(!playing2);
                 }}>
                     {playing2? <FontAwesomeIcon icon={faPauseCircle}/> :
                         <FontAwesomeIcon icon={faPlayCircle} />
@@ -49,7 +49,7 @@ export const MusicSampler = () => {
 
                 <div className="song" onMouseDown={() => setSong(song3)} onClick={() =>{
                     playing3? stop() : play();
-                    setPlaying3(!playing3)
+                    setPlaying3(!playing3);
                 }
                 }>
                     {playing3? <FontAwesomeIcon icon={faPauseCircle}/> :
@@ -61,7 +61,7 @@ export const MusicSampler = () => {
 
                 <div className="song" onMouseDown={() => setSong(song4)} onClick={() => {
                     playing4? stop() : play();
-                    setPlaying4(!playing4)
+                    setPlaying4(!playing4);
                 }}>
                     {playing4? <FontAwesomeIcon icon={faPauseCircle}/> :
                         <FontAwesomeIcon icon={faPlayCircle} />

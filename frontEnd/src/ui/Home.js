@@ -4,7 +4,7 @@ import {AudioPlayer} from "./AudioPlayer";
 import {MusicSampler} from "./NewAudio"
 import style from "./Home.Modules.css"
 import background from "../images/sempiternal.jpg"
-
+import {MogPlayer} from "./NewSoundT";
 
 
 export function Home() {
@@ -41,6 +41,7 @@ export function Home() {
 
 			<Container>
 <MusicSampler/>
+				<MogPlayer/>
 
 
 
