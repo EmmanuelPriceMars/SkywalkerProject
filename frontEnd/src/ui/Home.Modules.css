@@ -2,7 +2,7 @@
     background-image: url(../images/sempiternal.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed;
+    /*background-attachment: fixed;*/
     background-position-y: center;
     background-position-x: center;
 
@@ -12,13 +12,13 @@
 
 .fill-window {
     height: 100%;
-    position: absolute;
+    /*position: absolute;*/
     left: 0;
     width: 100%;
-    overflow: hidden;
+
 }
 
 h1 {
-    color: white;
+    color: blue;
 }
 

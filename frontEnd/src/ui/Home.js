@@ -15,6 +15,7 @@ export function Home() {
 	return (
 		<>
 			<div style={{ backgroundImage: `url(${background})` }} className="fill-window">
+
 			<Container >
 				<div className="  p-5 rounded my-5 text-center">
 						<h1 className="display-4">SKY WALKER BEATS</h1>
@@ -40,7 +41,7 @@ export function Home() {
 
 
 			<Container>
-<MusicSampler/>
+
 				<MogPlayer/>
 
 
