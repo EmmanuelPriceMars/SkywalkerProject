@@ -1,4 +1,4 @@
-import React, {createRef, useState} from "react";
+import React, {useRef, useEffect, useState} from "react";
 import ReactAudioPlayer from "react-audio-player";
 import feelings from "../In my feelings .mp3"
 import Bigbang from "../bang-v .mp3"
@@ -9,9 +9,35 @@ import foreignThree from "../ImageSSS/foreign tree.jpg"
 import inMyFeelings from "../ImageSSS/in my feelings pic.jpg"
 import melodyPic from "../ImageSSS/melody pic.jpg"
 import style from "./New.Modules.css"
+import useSound from "use-sound";
+import {toggle} from "./scripts";
 
 
 export const MogPlayer = () => {
+
+
+    const [Playing, setPlaying] = useState(null);
+    const toggle = () => setPlaying(!Playing);
+
+    useEffect(() => {
+            Playing ? ReactAudioPlayer.play() : ReactAudioPlayer.pause();
+        },
+        [Playing]
+    );
+    useEffect(() => {
+        ReactAudioPlayer.addEventListener('ended', () => setPlaying(false));
+        return () => {
+            ReactAudioPlayer.removeEventListener('ended', () => setPlaying(false))
+
+        };
+    }, []);
+    return [Playing, toggle()];
+
+
+
+
+
+
 
 
 
@@ -34,8 +60,10 @@ export const MogPlayer = () => {
 
                 <img src={bangStick} style={{width:150, height: 150}}/>
 
-            <ReactAudioPlayer src={Bigbang}
+            <ReactAudioPlayer  src={Bigbang}
                               controls
+                              onPlay={toggle}
+
 
 
             />
